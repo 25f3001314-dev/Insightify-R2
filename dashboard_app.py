@@ -64,46 +64,61 @@ def inject_custom_style():
             to   { opacity: 1; transform: translateY(0) scale(1); }
         }
         .hero-card {
-            border-radius: 16px;
-            padding: 18px 20px;
-            background: linear-gradient(115deg, var(--brand-deep) 0%, #14639c 52%, var(--brand) 100%);
-            color: white;
-            box-shadow: 0 10px 24px rgba(15, 76, 129, 0.22);
-            margin-bottom: 14px;
+            border-radius: 0;
+            padding: 28px 32px 22px 32px;
+            background: #1a1a2e;
+            color: #f0f0f0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.18);
+            margin: -1rem -1rem 18px -1rem;
             animation: heroSlideUp 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+        .hero-card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.55rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: #ffffff;
+            margin: 0 0 4px 0;
+        }
+        .hero-card p {
+            font-size: 0.92rem;
+            color: rgba(255,255,255,0.7);
+            line-height: 1.5;
         }
         .pitch-chip {
             display: inline-block;
-            border-radius: 999px;
-            padding: 6px 12px;
+            border-radius: 6px;
+            padding: 5px 11px;
             margin-right: 8px;
-            margin-top: 6px;
-            font-size: 0.8rem;
-            color: #0f172a;
-            background: #dff8f5;
-            border: 1px solid #bdeee8;
+            margin-top: 8px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: #e0f2fe;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.12);
+            backdrop-filter: blur(4px);
             animation: chipFadeIn 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
         }
         .pitch-chip:nth-child(1) { animation-delay: 0.15s; }
         .pitch-chip:nth-child(2) { animation-delay: 0.28s; }
         .pitch-chip:nth-child(3) { animation-delay: 0.41s; }
         .hero-subline {
-            margin-top: 10px;
-            font-size: 0.85rem;
-            letter-spacing: 0.08em;
+            margin-top: 12px;
+            font-size: 0.75rem;
+            letter-spacing: 0.14em;
             text-transform: uppercase;
-            font-weight: 700;
-            color: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.45);
             animation: chipFadeIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.52s both;
         }
         .hero-subline .dot {
             display: inline-block;
-            width: 6px;
-            height: 6px;
+            width: 4px;
+            height: 4px;
             border-radius: 999px;
-            background: rgba(255, 255, 255, 0.65);
+            background: rgba(255, 255, 255, 0.35);
             margin: 0 10px;
-            transform: translateY(-1px);
+            transform: translateY(-2px);
         }
         .insight-card {
             border: 1px solid #e2e8f0;
