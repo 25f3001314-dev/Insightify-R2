@@ -291,7 +291,7 @@ def kpi_block(df: pd.DataFrame):
 
 
 def model_info_block(metadata: dict):
-    st.subheader("Model Info")
+    st.markdown('<div class="section-highlight">Model Info</div>', unsafe_allow_html=True)
     metrics = metadata.get("metrics", {}) if isinstance(metadata, dict) else {}
     c1, c2, c3, c4 = st.columns(4)
     c1.metric("Model", str(metadata.get("model_name", "N/A")))
@@ -301,7 +301,7 @@ def model_info_block(metadata: dict):
 
 
 def charts_block(df: pd.DataFrame):
-    st.subheader("Behavior Overview")
+    st.markdown('<div class="section-highlight">Behavior Overview</div>', unsafe_allow_html=True)
     c1, c2 = st.columns(2)
 
     if {"Spending_Score", "Membership_upgrade"}.issubset(df.columns):
@@ -374,7 +374,7 @@ def score_customers(df: pd.DataFrame, model, model_cols, feature_medians: dict) 
 
 
 def tier_strategy_block(scored_df: pd.DataFrame):
-    st.subheader("Membership Tier Opportunity")
+    st.markdown('<div class="section-highlight">Membership Tier Opportunity</div>', unsafe_allow_html=True)
     view = scored_df.copy()
     if "Membership_Level" in view.columns:
         view["Membership_Tier"] = view["Membership_Level"].apply(_tier_label)
@@ -428,7 +428,7 @@ def tier_strategy_block(scored_df: pd.DataFrame):
 
 
 def campaign_targeting_block(scored_df: pd.DataFrame):
-    st.subheader("Targeting and Offer Planner")
+    st.markdown('<div class="section-highlight">Targeting &amp; Offer Planner</div>', unsafe_allow_html=True)
     st.caption("English action plan for campaign team: target audience, recommended offer, and expected ROI.")
 
     if scored_df.empty or "Upgrade_Probability" not in scored_df.columns:
@@ -611,7 +611,7 @@ def campaign_targeting_block(scored_df: pd.DataFrame):
 
 
 def offer_simulator_block(scored_df: pd.DataFrame):
-    st.subheader("Offer Impact Simulator")
+    st.markdown('<div class="section-highlight">Offer Impact Simulator</div>', unsafe_allow_html=True)
     st.caption(
         "Estimate campaign impact before launch using a practical what-if model."
     )
@@ -739,11 +739,13 @@ def next_best_action_block(scored_df: pd.DataFrame):
     split["share"] = split["customers"] / max(len(view), 1)
 
     c1, c2 = st.columns([1.4, 1.6])
+    n_action = len(split)
+    action_table_h = 38 + (n_action * 36)
     c1.dataframe(
         split.style.format({"avg_prob": "{:.2%}", "share": "{:.1%}"}),
         width="stretch",
         hide_index=True,
-        height=210,
+        height=action_table_h,
     )
 
     fig = px.pie(
@@ -753,7 +755,7 @@ def next_best_action_block(scored_df: pd.DataFrame):
         title="Action Mix for Campaign Team",
         hole=0.45,
     )
-    fig.update_layout(margin=dict(t=36, b=10, l=10, r=10))
+    fig.update_layout(margin=dict(t=36, b=10, l=10, r=10), height=max(action_table_h + 40, 250))
     c2.plotly_chart(fig, width="stretch")
 
     show_cols = [
@@ -774,7 +776,7 @@ def next_best_action_block(scored_df: pd.DataFrame):
 
 
 def prediction_block(df: pd.DataFrame, model, model_cols, feature_medians: dict, metadata: dict):
-    st.subheader("Live Upgrade Prediction")
+    st.markdown('<div class="section-highlight">Live Upgrade Prediction</div>', unsafe_allow_html=True)
     holdout_acc = float(metadata.get("metrics", {}).get("accuracy", 0.0))
     st.caption(f"Using saved artifact model. Holdout accuracy: {holdout_acc:.3f}")
 
@@ -890,7 +892,7 @@ def build_report_dataframe(summary_text: str, context: dict, metadata: dict) -> 
 
 
 def ai_summary_block(df: pd.DataFrame, metadata: dict, auto_summary: bool = False):
-    st.subheader("AI Marketing Summary (Mistral)")
+    st.markdown('<div class="section-highlight">AI Marketing Summary (Mistral)</div>', unsafe_allow_html=True)
 
     api_key = get_mistral_api_key()
     if not api_key:
@@ -964,7 +966,7 @@ def ai_summary_block(df: pd.DataFrame, metadata: dict, auto_summary: bool = Fals
                 st.error(f"Failed to generate AI summary: {exc}")
 
     if st.session_state.get("last_ai_summary"):
-        st.markdown("### Export AI Report")
+        st.markdown('<div class="section-highlight" style="font-size:1rem;padding:6px 16px;">Export AI Report</div>', unsafe_allow_html=True)
         report_md = build_report_markdown(
             st.session_state["last_ai_summary"],
             st.session_state.get("last_ai_context", context),
@@ -1026,7 +1028,7 @@ def main():
     charts_block(df)
     model_info_block(metadata)
     prediction_block(df, model, model_cols, feature_medians, metadata)
-    st.markdown("## Business Growth Studio")
+    st.markdown('<div class="section-highlight" style="font-size:1.45rem;padding:10px 24px;">Business Growth Studio</div>', unsafe_allow_html=True)
     tier_strategy_block(scored_df)
     campaign_targeting_block(scored_df)
     offer_simulator_block(scored_df)
