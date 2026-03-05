@@ -133,6 +133,19 @@ def inject_custom_style():
             box-shadow: 0 3px 14px rgba(45, 42, 38, 0.05);
             margin: 6px 0 12px 0;
         }
+        .section-highlight {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--olive) 0%, var(--olive-dark) 100%);
+            color: #ffffff;
+            padding: 8px 20px 8px 16px;
+            border-radius: 10px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            margin-bottom: 4px;
+            box-shadow: 0 3px 10px rgba(107, 124, 62, 0.2);
+        }
         .stDataFrame, .stPlotlyChart {
             border-radius: 16px;
             overflow: hidden;
@@ -668,8 +681,8 @@ def offer_simulator_block(scored_df: pd.DataFrame):
 
 
 def next_best_action_block(scored_df: pd.DataFrame):
-    st.subheader("Next Best Action Engine")
-    st.caption("Real-life customer attraction strategy with segment-specific actions.")
+    st.markdown('<div class="section-highlight">Next Best Action Engine</div>', unsafe_allow_html=True)
+    st.caption("Segment-specific campaign actions with recommended offers for every customer.")
 
     if scored_df.empty or "Upgrade_Probability" not in scored_df.columns:
         st.info("No scored customers available.")
@@ -714,11 +727,12 @@ def next_best_action_block(scored_df: pd.DataFrame):
     )
     split["share"] = split["customers"] / max(len(view), 1)
 
-    c1, c2 = st.columns([1.1, 1.9])
+    c1, c2 = st.columns([1.4, 1.6])
     c1.dataframe(
         split.style.format({"avg_prob": "{:.2%}", "share": "{:.1%}"}),
         width="stretch",
         hide_index=True,
+        height=210,
     )
 
     fig = px.pie(
@@ -728,6 +742,7 @@ def next_best_action_block(scored_df: pd.DataFrame):
         title="Action Mix for Campaign Team",
         hole=0.45,
     )
+    fig.update_layout(margin=dict(t=36, b=10, l=10, r=10))
     c2.plotly_chart(fig, width="stretch")
 
     show_cols = [
@@ -743,6 +758,7 @@ def next_best_action_block(scored_df: pd.DataFrame):
             preview.style.format({"Upgrade_Probability": "{:.2%}"}),
             width="stretch",
             hide_index=True,
+            height=420,
         )
 
 
