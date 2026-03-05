@@ -30,30 +30,36 @@ def inject_custom_style():
     st.markdown(
         """
         <style>
-        @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Space+Grotesk:wght@500;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
         :root {
-            --bg-0: #f6f8fb;
+            --bg-0: #faf8f4;
             --bg-1: #ffffff;
-            --ink-0: #0f172a;
-            --ink-1: #334155;
-            --brand: #0ea5a3;
-            --brand-deep: #0f4c81;
-            --surface: #f8fafc;
+            --ink-0: #2d2a26;
+            --ink-1: #6b6560;
+            --olive: #6b7c3e;
+            --olive-light: #e8edda;
+            --olive-dark: #4a5a28;
+            --cream: #f5f0e8;
+            --peach: #fce8dc;
+            --sage: #dde5cc;
+            --warm-white: #fefcf9;
         }
         .stApp {
-            background: radial-gradient(circle at 0% 0%, #eef8ff 0%, var(--bg-1) 45%, var(--bg-0) 100%);
+            background: var(--bg-0);
             color: var(--ink-0);
-            font-family: 'Manrope', sans-serif;
+            font-family: 'DM Sans', sans-serif;
         }
         h1, h2, h3 {
-            font-family: 'Space Grotesk', sans-serif;
-            letter-spacing: -0.01em;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            letter-spacing: -0.02em;
+            color: var(--ink-0);
         }
         .stMetric {
-            background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
-            border: 1px solid #dbe7f3;
-            border-radius: 12px;
-            padding: 8px 10px;
+            background: var(--bg-1);
+            border: 1px solid #ece7df;
+            border-radius: 16px;
+            padding: 10px 12px;
+            box-shadow: 0 2px 8px rgba(45, 42, 38, 0.04);
         }
         @keyframes heroSlideUp {
             from { opacity: 0; transform: translateY(18px); }
@@ -64,39 +70,38 @@ def inject_custom_style():
             to   { opacity: 1; transform: translateY(0) scale(1); }
         }
         .hero-card {
-            border-radius: 0;
-            padding: 28px 32px 22px 32px;
-            background: #1a1a2e;
-            color: #f0f0f0;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.18);
-            margin: -1rem -1rem 18px -1rem;
+            border-radius: 20px;
+            padding: 26px 28px 22px 28px;
+            background: linear-gradient(135deg, var(--olive) 0%, var(--olive-dark) 100%);
+            color: #fefcf9;
+            box-shadow: 0 8px 28px rgba(107, 124, 62, 0.18);
+            margin-bottom: 18px;
             animation: heroSlideUp 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
         }
         .hero-card h3 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.55rem;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.45rem;
             font-weight: 700;
             letter-spacing: -0.02em;
             color: #ffffff;
-            margin: 0 0 4px 0;
+            margin: 0 0 6px 0;
         }
         .hero-card p {
-            font-size: 0.92rem;
-            color: rgba(255,255,255,0.7);
-            line-height: 1.5;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.8);
+            line-height: 1.55;
         }
         .pitch-chip {
             display: inline-block;
-            border-radius: 6px;
-            padding: 5px 11px;
+            border-radius: 999px;
+            padding: 5px 13px;
             margin-right: 8px;
             margin-top: 8px;
             font-size: 0.78rem;
             font-weight: 600;
-            color: #e0f2fe;
-            background: rgba(255,255,255,0.08);
-            border: 1px solid rgba(255,255,255,0.12);
-            backdrop-filter: blur(4px);
+            color: var(--olive-dark);
+            background: var(--olive-light);
+            border: 1px solid #d1dbb8;
             animation: chipFadeIn 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
         }
         .pitch-chip:nth-child(1) { animation-delay: 0.15s; }
@@ -104,11 +109,11 @@ def inject_custom_style():
         .pitch-chip:nth-child(3) { animation-delay: 0.41s; }
         .hero-subline {
             margin-top: 12px;
-            font-size: 0.75rem;
-            letter-spacing: 0.14em;
+            font-size: 0.74rem;
+            letter-spacing: 0.12em;
             text-transform: uppercase;
             font-weight: 600;
-            color: rgba(255, 255, 255, 0.45);
+            color: rgba(255, 255, 255, 0.55);
             animation: chipFadeIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.52s both;
         }
         .hero-subline .dot {
@@ -116,27 +121,42 @@ def inject_custom_style():
             width: 4px;
             height: 4px;
             border-radius: 999px;
-            background: rgba(255, 255, 255, 0.35);
+            background: rgba(255, 255, 255, 0.4);
             margin: 0 10px;
             transform: translateY(-2px);
         }
         .insight-card {
-            border: 1px solid #e2e8f0;
-            background: linear-gradient(180deg, #ffffff 0%, var(--surface) 100%);
-            border-radius: 14px;
-            padding: 14px 16px;
-            box-shadow: 0 3px 12px rgba(15, 23, 42, 0.06);
-            margin: 6px 0 10px 0;
+            border: 1px solid #ece7df;
+            background: var(--bg-1);
+            border-radius: 18px;
+            padding: 16px 18px;
+            box-shadow: 0 3px 14px rgba(45, 42, 38, 0.05);
+            margin: 6px 0 12px 0;
         }
         .stDataFrame, .stPlotlyChart {
-            border-radius: 12px;
+            border-radius: 16px;
             overflow: hidden;
+            background: var(--bg-1);
         }
         .stButton > button, .stDownloadButton > button {
-            border-radius: 10px;
-            border: 1px solid #cfe2f6;
-            background: #ffffff;
+            border-radius: 12px;
+            border: 1px solid #d6cfbf;
+            background: var(--bg-1);
+            color: var(--olive-dark);
             font-weight: 600;
+            transition: all 0.15s ease;
+        }
+        .stButton > button:hover, .stDownloadButton > button:hover {
+            background: var(--olive-light);
+            border-color: var(--olive);
+        }
+        .stSelectbox > div > div,
+        .stMultiSelect > div > div,
+        .stSlider > div {
+            border-radius: 12px;
+        }
+        .stSidebar > div:first-child {
+            background: var(--cream);
         }
         </style>
         """,
