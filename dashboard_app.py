@@ -153,6 +153,20 @@ def inject_custom_style():
             margin-bottom: 4px;
             box-shadow: 0 3px 10px rgba(107, 124, 62, 0.2);
         }
+        .section-sub {
+            display: inline-block;
+            background: var(--olive-light);
+            color: var(--olive-dark);
+            padding: 7px 18px 7px 14px;
+            border-radius: 9px;
+            border: 1.5px solid var(--olive);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            margin-bottom: 4px;
+            margin-top: 8px;
+        }
         .stDataFrame, .stPlotlyChart {
             border-radius: 16px;
             overflow: hidden;
@@ -374,7 +388,7 @@ def score_customers(df: pd.DataFrame, model, model_cols, feature_medians: dict) 
 
 
 def tier_strategy_block(scored_df: pd.DataFrame):
-    st.markdown('<div class="section-highlight">Membership Tier Opportunity</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-sub">Membership Tier Opportunity</div>', unsafe_allow_html=True)
     view = scored_df.copy()
     if "Membership_Level" in view.columns:
         view["Membership_Tier"] = view["Membership_Level"].apply(_tier_label)
@@ -428,7 +442,7 @@ def tier_strategy_block(scored_df: pd.DataFrame):
 
 
 def campaign_targeting_block(scored_df: pd.DataFrame):
-    st.markdown('<div class="section-highlight">Targeting &amp; Offer Planner</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-sub">Targeting &amp; Offer Planner</div>', unsafe_allow_html=True)
     st.caption("English action plan for campaign team: target audience, recommended offer, and expected ROI.")
 
     if scored_df.empty or "Upgrade_Probability" not in scored_df.columns:
@@ -611,7 +625,7 @@ def campaign_targeting_block(scored_df: pd.DataFrame):
 
 
 def offer_simulator_block(scored_df: pd.DataFrame):
-    st.markdown('<div class="section-highlight">Offer Impact Simulator</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-sub">Offer Impact Simulator</div>', unsafe_allow_html=True)
     st.caption(
         "Estimate campaign impact before launch using a practical what-if model."
     )
@@ -692,7 +706,7 @@ def offer_simulator_block(scored_df: pd.DataFrame):
 
 
 def next_best_action_block(scored_df: pd.DataFrame):
-    st.markdown('<div class="section-highlight">Next Best Action Engine</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-sub">Next Best Action Engine</div>', unsafe_allow_html=True)
     st.caption("Segment-specific campaign actions with recommended offers for every customer.")
 
     if scored_df.empty or "Upgrade_Probability" not in scored_df.columns:
