@@ -397,6 +397,9 @@ def tier_strategy_block(scored_df: pd.DataFrame):
         .sort_values("avg_propensity", ascending=False)
     )
 
+    n_rows = len(summary)
+    table_height = 38 + (n_rows * 36)
+
     c1, c2 = st.columns([1.3, 1.7])
     c1.dataframe(
         summary.style.format(
@@ -408,7 +411,7 @@ def tier_strategy_block(scored_df: pd.DataFrame):
         ),
         width="stretch",
         hide_index=True,
-        height=220,
+        height=table_height,
     )
 
     fig = px.bar(
@@ -420,7 +423,7 @@ def tier_strategy_block(scored_df: pd.DataFrame):
         text="avg_propensity",
     )
     fig.update_traces(texttemplate="%{text:.1%}", textposition="outside")
-    fig.update_layout(yaxis_tickformat=".0%", margin=dict(t=36, b=10, l=10, r=10))
+    fig.update_layout(yaxis_tickformat=".0%", margin=dict(t=36, b=10, l=10, r=10), height=max(table_height + 40, 250))
     c2.plotly_chart(fig, width="stretch")
 
 
