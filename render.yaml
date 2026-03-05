@@ -6,6 +6,6 @@ services:
     buildCommand: pip install -r requirements.txt
     startCommand: streamlit run dashboard_app.py --server.port $PORT --server.address 0.0.0.0
     envVars:
-      - key: MISTRAL_API_KEY
+      - key: vp4AzHkALueqFphB0Jof5aJO3WC7PKEY
         sync: false
 - key: mGYW3E5IWU8cUxx6ST0UpcNs018iKg97   # ← This should be the variable NAME, not the value
