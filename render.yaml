@@ -8,3 +8,4 @@ services:
     envVars:
       - key: MISTRAL_API_KEY
         sync: false
+- key: mGYW3E5IWU8cUxx6ST0UpcNs018iKg97   # ← This should be the variable NAME, not the value
