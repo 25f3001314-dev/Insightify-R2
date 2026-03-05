@@ -93,16 +93,23 @@ def inject_custom_style():
         }
         .pitch-chip {
             display: inline-block;
-            border-radius: 999px;
-            padding: 5px 13px;
-            margin-right: 8px;
+            border-radius: 10px;
+            padding: 7px 16px;
+            margin-right: 10px;
             margin-top: 8px;
-            font-size: 0.78rem;
-            font-weight: 600;
+            font-size: 0.8rem;
+            font-weight: 700;
             color: var(--olive-dark);
-            background: var(--olive-light);
-            border: 1px solid #d1dbb8;
+            background: linear-gradient(180deg, #f4f7e8 0%, #dce3c6 100%);
+            border: 1px solid #c8d1a8;
+            box-shadow: 0 3px 0 #b5be96, 0 5px 10px rgba(74, 90, 40, 0.15);
+            text-shadow: 0 1px 0 rgba(255,255,255,0.6);
             animation: chipFadeIn 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+            transition: transform 0.1s ease, box-shadow 0.1s ease;
+        }
+        .pitch-chip:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 0 #b5be96, 0 7px 14px rgba(74, 90, 40, 0.2);
         }
         .pitch-chip:nth-child(1) { animation-delay: 0.15s; }
         .pitch-chip:nth-child(2) { animation-delay: 0.28s; }
@@ -181,15 +188,15 @@ def hero_block():
     st.markdown(
         """
         <div class="hero-card">
-            <h3 style="margin:0;">Growth Intelligence for Upgrade Revenue</h3>
-            <p style="margin:6px 0 8px 0;opacity:.95;">
-                Convert behavior signals into campaign actions: identify the right audience, launch the right offer, and forecast ROI before spend.
+            <h3 style="margin:0;">Upgrade Growth Intelligence</h3>
+            <p style="margin:6px 0 10px 0;opacity:.85;font-size:0.88rem;">
+                Audience &rarr; Offer &rarr; ROI
             </p>
-            <span class="pitch-chip">Real-Time Propensity Scoring</span>
-            <span class="pitch-chip">Offer ROI Planning</span>
-            <span class="pitch-chip">Next-Best-Action Playbooks</span>
+            <span class="pitch-chip">Propensity</span>
+            <span class="pitch-chip">ROI Planning</span>
+            <span class="pitch-chip">Action Playbooks</span>
             <div class="hero-subline">
-                Acquisition <span class="dot"></span> Retention <span class="dot"></span> Upgrade Revenue
+                Acquisition <span class="dot"></span> Retention <span class="dot"></span> Upgrade
             </div>
         </div>
         """,
@@ -390,7 +397,7 @@ def tier_strategy_block(scored_df: pd.DataFrame):
         .sort_values("avg_propensity", ascending=False)
     )
 
-    c1, c2 = st.columns([1.2, 1.8])
+    c1, c2 = st.columns([1.3, 1.7])
     c1.dataframe(
         summary.style.format(
             {
@@ -401,6 +408,7 @@ def tier_strategy_block(scored_df: pd.DataFrame):
         ),
         width="stretch",
         hide_index=True,
+        height=220,
     )
 
     fig = px.bar(
@@ -408,11 +416,11 @@ def tier_strategy_block(scored_df: pd.DataFrame):
         x="Membership_Tier",
         y="avg_propensity",
         color="customers",
-        title="Upgrade Propensity by Membership Tier",
+        title="Propensity by Tier",
         text="avg_propensity",
     )
     fig.update_traces(texttemplate="%{text:.1%}", textposition="outside")
-    fig.update_layout(yaxis_tickformat=".0%")
+    fig.update_layout(yaxis_tickformat=".0%", margin=dict(t=36, b=10, l=10, r=10))
     c2.plotly_chart(fig, width="stretch")
 
 
@@ -986,8 +994,8 @@ def ai_summary_block(df: pd.DataFrame, metadata: dict, auto_summary: bool = Fals
 
 def main():
     inject_custom_style()
-    st.title("Insightify Upgrade Growth Command Center", anchor=False)
-    st.caption("Decision dashboard for customer targeting, incentive strategy, and campaign ROI management.")
+    st.title("Insightify Growth Center", anchor=False)
+    st.caption("Targeting, offers, and ROI — all in one view.")
     hero_block()
 
     manual = st.sidebar.button("Refresh Now")
